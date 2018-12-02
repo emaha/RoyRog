@@ -1,45 +1,37 @@
-#include <iostream>
-#include <stdlib.h>
-#include <time.h>
+#include <SFML/Graphics.hpp>
 
-using namespace std;
-
-int main(int argc,char *argv[])
+int main()
 {
-    srand (time(NULL));
-    int money = 5000;
-    int bet=1;
-    int zero, one;
+    // Create the main window
+    sf::RenderWindow app(sf::VideoMode(800, 600), "SFML window");
 
-    zero = one = 0;
+    // Load a sprite to display
+    sf::Texture texture;
+    if (!texture.loadFromFile("cb.bmp"))
+        return EXIT_FAILURE;
+    sf::Sprite sprite(texture);
 
-    for(int i=0;i<1000;i++)
+	// Start the game loop
+    while (app.isOpen())
     {
-        bet = 1;
-        while(1==1)
+        // Process events
+        sf::Event event;
+        while (app.pollEvent(event))
         {
-            money-=bet;
-
-
-            int rnd = rand()%2;
-            cout << rnd << "   " << money << endl;
-            if(rnd==1)
-            {
-                money+=bet*2;
-                bet=1;
-                one++;
-                break;
-            }
-
-            bet*=2;
-            zero++;
+            // Close window : exit
+            if (event.type == sf::Event::Closed)
+                app.close();
         }
 
+        // Clear screen
+        app.clear();
 
+        // Draw the sprite
+        app.draw(sprite);
+
+        // Update the window
+        app.display();
     }
 
-
-    cout << zero << "\t" << one << endl;
-
-    return 0;
+    return EXIT_SUCCESS;
 }
