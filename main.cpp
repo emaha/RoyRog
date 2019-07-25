@@ -14,6 +14,7 @@ int main()
 	// Start the game loop
     while (app.isOpen())
     {
+
         // Process events
         sf::Event event;
         while (app.pollEvent(event))
